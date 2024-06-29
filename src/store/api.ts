@@ -2,16 +2,6 @@
 import axios from "@/store/axios";
 import {District, FAQ, Feedback, Job, JobCategory, Region, Worker} from "@/types";
 
-export async function getDistricts() {
-  const {data} = await axios.get<District[]>("/api/District/GetAll");
-  return data;
-}
-
-export async function getDistrictById(id: string) {
-  const {data} = await axios.get<District>(`/api/District/GetById/${id}`);
-  return data;
-}
-
 export async function getDistrictsByRegionId(regionId: string) {
   const {data} = await axios.get<District[]>(`/api/District/GetByRegionId/${regionId}`);
   return data;
