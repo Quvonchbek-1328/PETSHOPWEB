@@ -1,4 +1,5 @@
 import axios, { AxiosInstance } from "axios";
+const https = require('https');
 
 // global url
 // const BASE_URL = "http://172.16.14.23:9090";
