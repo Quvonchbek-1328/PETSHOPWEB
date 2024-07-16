@@ -8,6 +8,9 @@ const BASE_URL = "http://45.130.148.122:27";
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: BASE_URL,
+httpsAgent: new https.Agent({
+    rejectUnauthorized: false, // This allows Axios to accept self-signed certificates or invalid certs
+  }),
 });
 
 export default axiosInstance;
