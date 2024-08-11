@@ -14,14 +14,14 @@ const ForgotPassword = () => {
         </Link>
       </div>
       <div className="mt-[72px]">
-        <h4 className="text-xl font-medium text-authblack tracking-[0.15px] ">
-          Reset your password
+        <h4 className="text-xl font-medium text-[#000000DE] tracking-[0.15px] ">
+          Sms Code
         </h4>
-        <p className="text-[14px] text-authblack leading-[20.02px] tracking-[0.15px] mb-6 ">
-          Type in your registered email address to reset password
+        <p className="text-[14px] leading-[20.02px] tracking-[0.15px] mb-6 ">
+          Please check your sms code for next steps.
         </p>
         <form action="#" className="flex flex-col gap-5">
-          <FloatingLabelInput placeholder="Phone numbers" id="phone" />
+          <FloatingLabelInput placeholder="SMS code" id="sms" />
           <div>
             <AuthButton autoWidth variant="contained" size="medium">
               Next <BiRightArrowAlt className="text-2xl ms-2" />
@@ -31,7 +31,7 @@ const ForgotPassword = () => {
       </div>
       <Link href="/login" className="mt-[72px] block">
         <AuthButton variant="outlined" size="medium" fullWidth>
-          Back to Login
+          Back
         </AuthButton>
       </Link>
     </div>

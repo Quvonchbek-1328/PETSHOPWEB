@@ -41,6 +41,9 @@ const config = {
         darkblue: "#2F07E5",
         lightblue: "#F8F9FF",
         darkindigo: "#1A0283",
+        authblack: "#000000DE",
+        authbtn: "#130160",
+        authhoverbtn: "#2a1b87",
       },
       keyframes: {
         "accordion-down": {
