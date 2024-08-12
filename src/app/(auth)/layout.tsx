@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import authImage from "../../../public/auth.svg";
 import Image from "next/image";
 import "../(home)/globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "Uzworks Uz",
@@ -17,6 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+      <Toaster richColors />
         <div className="flex items-center justify-between">
           <main className="flex justify-center items-center w-full h-full">
             <div>{children}</div>

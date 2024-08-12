@@ -1,3 +1,4 @@
+// FloatingLabelInput.tsx
 "use client";
 import { useState, FC } from "react";
 import { cn } from "@/lib/utils";
@@ -6,17 +7,25 @@ interface FloatingLabelInputProps {
   id: string;
   type?: string;
   placeholder: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const FloatingLabelInput: FC<FloatingLabelInputProps> = ({ id, type = "text", placeholder }) => {
+const FloatingLabelInput: FC<FloatingLabelInputProps> = ({ id, type = "text", placeholder, onChange }) => {
   const [hasValue, setHasValue] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setHasValue(e.target.value !== "");
+    if (onChange) {
+      onChange(e);
+    }
+  };
 
   return (
     <div className="relative">
       <input
         id={id}
         type={type}
-        onChange={(e) => setHasValue(e.target.value !== "")}
+        onChange={handleChange}
         className="peer block w-full h-[54px] px-3 text-base bg-transparent border border-[#0000003B] rounded-md focus:outline-none focus:ring-0"
         placeholder=" "
       />

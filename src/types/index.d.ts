@@ -72,3 +72,16 @@ export interface Experience {
   endDate: Date;
   description: string;
 }
+
+export interface RegisterRequest {
+  firstname: string;
+  lastname: string;
+  phoneNumber: string;
+  password: stringst;
+  confirmPassword: string;
+  role: string;
+}
+
+export interface RegisterResponse {
+  token: string;
+}
