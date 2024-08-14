@@ -17,13 +17,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
-      <Toaster richColors />
-        <div className="flex items-center justify-between">
+      <body className="font-roboto container px-4">
+        <Toaster richColors />
+        <div className="grid grid-cols-1 lg:grid-cols-2 place-items-center  h-screen">
           <main className="flex justify-center items-center w-full h-full">
-            <div>{children}</div>
+            <div className="max-w-[464px] w-full">{children}</div>
           </main>
-          <Image src={authImage} alt="Auth image" />
+          <div className="lg:flex md:hidden sm:hidden hidden">
+            <Image src={authImage} alt="Auth image" />
+          </div>
         </div>
       </body>
     </html>

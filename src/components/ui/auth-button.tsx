@@ -6,7 +6,6 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'small' | 'medium' | 'large';
   fullWidth?: boolean;
   autoWidth?: boolean;
-  textTransform?: 'uppercase' | 'capitalize';
 }
 
 const AuthButton: React.FC<ButtonProps> = ({
@@ -15,15 +14,14 @@ const AuthButton: React.FC<ButtonProps> = ({
   size = 'medium',
   fullWidth = false,
   autoWidth = false,
-  textTransform = 'uppercase',
   ...props
 }) => {
 
-  const baseStyles = 'inline-flex items-center justify-center border-2 font-medium rounded-[4px]';
+  const baseStyles = 'inline-flex items-center justify-center border-2 lg:text-[18px] text-md:[14px] text-sm font-medium rounded-[4px]';
 
   const variantStyles = {
-    contained: 'bg-authbtn border-authbtn text-white hover:bg-[#2a1b87]', // ? hover:text-authbtn hover:bg-white transition-colors
-    outlined: 'border-authbtn text-authbtn',  // ? hover:text-white hover:bg-authbtn transition-colors
+    contained: 'bg-authbtn border-authbtn text-white hover:bg-[#2a1b87]',
+    outlined: 'border-authbtn text-authbtn',
   };
 
   const sizeStyles = {
@@ -33,13 +31,8 @@ const AuthButton: React.FC<ButtonProps> = ({
   };
 
   const widthStyles = {
-    fullWidth: 'w-full py-3',
+    fullWidth: 'w-full py-[9px]',
     authWidth: '',
-  };
-
-  const textTransformStyles = {
-    uppercase: 'uppercase',
-    capitalize: 'capitalize',
   };
 
   const combinedStyles = cn(
@@ -49,7 +42,6 @@ const AuthButton: React.FC<ButtonProps> = ({
     {
       [widthStyles.fullWidth]: fullWidth,
       [widthStyles.authWidth]: autoWidth,
-      [textTransformStyles[textTransform]]: true,
     }
   );
 

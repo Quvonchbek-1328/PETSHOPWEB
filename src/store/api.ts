@@ -1,6 +1,6 @@
 // District
 import axios from "@/store/axios";
-import {District, FAQ, Feedback, Job, JobCategory, Region, RegisterRequest, RegisterResponse, Worker} from "@/types";
+import {District, FAQ, Feedback, Job, JobCategory, Region, Worker} from "@/types";
 
 export async function getDistrictsByRegionId(regionId: string) {
   const {data} = await axios.get<District[]>(`/api/District/GetByRegionId/${regionId}`);
@@ -117,10 +117,4 @@ const getQuery = (params: Map<string, string>): string => {
   return Array.from(params.entries())
     .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
     .join('&');
-}
-
-// Auth
-export const postAuthRegister = async (data: RegisterRequest) : Promise<RegisterResponse> => {
-  const {data: response} = await axios.post<RegisterResponse>("/Auth/signup", data);
-  return response;
 }
