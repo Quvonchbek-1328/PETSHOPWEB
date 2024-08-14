@@ -1,15 +1,21 @@
-"use client"
+"use client";
 
-import {toast} from "sonner";
+import { toast } from "sonner";
 import axios from "@/store/axios";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {useForm} from "react-hook-form";
-import {z} from "zod";
-import {Form, FormControl, FormField, FormItem, FormMessage} from "@/components/ui/form";
-import {Input} from "@/components/ui/input";
-import {Button} from "@/components/ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import Partners from "@/components/partners/partners";
-import {contactSchema} from "@/lib/validation";
+import { contactSchema } from "@/lib/validation";
 import { Textarea } from "@/components/ui/textarea";
 
 const Contact = () => {
@@ -20,18 +26,13 @@ const Contact = () => {
       phoneNumber: "+998",
       message: "",
     },
-  })
+  });
 
   async function onSubmit(values: z.infer<typeof contactSchema>) {
     try {
-      const { data } = await axios.post("/api/Contact/Create", values);
-      if (data) {
-        toast.success("Murojaatingiz qabul qilindi");
-        form.reset()
-      }
-      else {
-        toast.error("Murojaatingiz qabul qilinmadi");
-      }
+      await axios.post("/api/Contact/Create", values);
+      toast.success("Murojaatingiz qabul qilindi");
+      form.reset();
     } catch (error) {
       toast.error("Murojaatingiz qabul qilinmadi");
     }
@@ -43,7 +44,9 @@ const Contact = () => {
     <div className="flex flex-col gap-y-8">
       <div className="py-8 bg-lightblue">
         <div className="flex flex-col gap-y-8 container">
-          <h1 className="text-5xl font-semibold text-darkindigo">Biz bilan bog&apos;laning</h1>
+          <h1 className="text-5xl font-semibold text-darkindigo">
+            Biz bilan bog&apos;laning
+          </h1>
           <div className="bg-white flex items-center justify-center rounded-xl md:py-16 py-0">
             <Form {...form}>
               <form
@@ -105,17 +108,19 @@ const Contact = () => {
                   type="submit"
                   disabled={isSubmitting}
                   className="py-[12px] px-[120px] rounded-2xl text-xl font-medium leading-[100%]"
-                >Yuborish</Button>
+                >
+                  Yuborish
+                </Button>
               </form>
             </Form>
           </div>
         </div>
       </div>
       <div className={"mb-8"}>
-        <Partners/>
+        <Partners />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;
