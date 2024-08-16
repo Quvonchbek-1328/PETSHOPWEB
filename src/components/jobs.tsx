@@ -15,6 +15,7 @@ const Jobs = () => {
   const [loading, setLoading] = useState(true)
   const router = useRouter();
 
+  // this is not best practice bro, 
   useEffect(() => {
     getTopJobs().then(
       (data) => {

@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image";
 import {Button} from "./ui/button";
 import {useRouter} from "next/navigation";
 
@@ -30,10 +31,12 @@ const Hero = () => {
           </div>
         </div>
         <div className="basis-1/2 lg:block hidden">
-          <img
+          <Image
             src="/heroImage.svg"
             alt=""
-            className="w-[700px] h-[546px] object-cover"
+            // className="w-[700px] h-[546px] object-cover"
+            width={700}
+            height={546}
           />
         </div>
       </div>

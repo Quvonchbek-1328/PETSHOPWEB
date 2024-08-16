@@ -1,20 +1,20 @@
 "use client"
 
-import {useRouter} from "next/navigation";
-import {Button} from "@/components/ui/button";
-import {useEffect, useState} from "react";
-import {getTopWorkers} from "@/store/api";
-import {SkeletonCard} from "@/components/skeleton/skeleton-card";
-import {Carousel, CarouselContent, CarouselItem} from "@/components/ui/carousel";
+import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+import { getTopWorkers } from "@/store/api";
+import { SkeletonCard } from "@/components/skeleton/skeleton-card";
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import WorkerCard from "@/components/worker-card";
-import {Worker} from "@/types";
+import { Worker } from "@/types";
 
 const Workers = () => {
   const [loading, setLoading] = useState(true)
   const [workers, setWorkers] = useState<Worker[]>([])
   const router = useRouter();
-
+  // this is not best practice bro, 
   useEffect(() => {
     getTopWorkers().then(
       (data) => {
@@ -32,9 +32,9 @@ const Workers = () => {
         </h1>
         {loading ? (<div className={"grid grid-cols-3 gap-4"}>
           {
-            Array.from({length: 3}).map((_, index) => (
+            Array.from({ length: 3 }).map((_, index) => (
               <div key={index} className={"flex flex-col bg-white rounded-lg shadow-[0_1px_8px_-2px_#2F07E5]"}>
-                <SkeletonCard/>
+                <SkeletonCard />
               </div>
             ))
           }
@@ -54,7 +54,7 @@ const Workers = () => {
               {workers.map((worker, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                   <div className="p-1">
-                    <WorkerCard worker={worker}/>
+                    <WorkerCard worker={worker} />
                   </div>
                 </CarouselItem>
               ))}
