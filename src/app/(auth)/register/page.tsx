@@ -24,7 +24,7 @@ import SmsCode from "@/components/forms/sms-code";
 export default function Register() {
   const [step, setStep] = useState(0);
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [selectedRole, setSelectedRole] = useState<"Employee" | "Employer" | null>(null);
+  const [selectedRole, setSelectedRole] = useState<"Customer" | "Seller" | null>(null);
 
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
@@ -187,10 +187,10 @@ export default function Register() {
                     type="button"
                     fullWidth
                     variant={
-                      selectedRole === "Employee" ? "contained" : "outlined"
+                      selectedRole === "Customer" ? "contained" : "outlined"
                     }
                     size="medium"
-                    onClick={() => setSelectedRole("Employee")}
+                    onClick={() => setSelectedRole("Seller")}
                   >
                     Ishchi
                   </AuthButton>
@@ -198,10 +198,10 @@ export default function Register() {
                     type="button"
                     fullWidth
                     variant={
-                      selectedRole === "Employer" ? "contained" : "outlined"
+                      selectedRole === "Seller" ? "contained" : "outlined"
                     }
                     size="medium"
-                    onClick={() => setSelectedRole("Employer")}
+                    onClick={() => setSelectedRole("Seller")}
                   >
                     Ish beruvchi
                   </AuthButton>

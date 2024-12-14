@@ -3,23 +3,23 @@
 import {useRouter} from "next/navigation";
 import {Button} from "@/components/ui/button";
 import {useEffect, useState} from "react";
-import {Job} from "@/types";
-import {getTopJobs} from "@/store/api";
+import {Pet} from "@/types";
+import {getTopPets} from "@/store/api";
 import {SkeletonCard} from "@/components/skeleton/skeleton-card";
 import {Carousel, CarouselContent, CarouselItem} from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import JobCard from "@/components/job-card";
+import PetCard from "@/components/pet-card";
 
-const Jobs = () => {
-  const [jobs, setJobs] = useState<Job[]>([]);
+const Pets = () => {
+  const [pet, setPets] = useState<Pet[]>([]);
   const [loading, setLoading] = useState(true)
   const router = useRouter();
 
   // this is not best practice bro, 
   useEffect(() => {
-    getTopJobs().then(
+    getTopPets().then(
       (data) => {
-        setJobs(data);
+        setPets(data);
         setLoading(false);
       }
     )
@@ -29,7 +29,7 @@ const Jobs = () => {
     <div className="bg-lightblue">
       <div className="container py-8 flex flex-col gap-y-8">
         <h1 className="text-center font-roboto sm:text-5xl text-4xl font-semibold">
-          <span className="text-darkblue">Top</span> Ishlar
+          <span className="text-darkblue">Top</span> PetS
         </h1>
         {loading ? <div className={"grid grid-cols-3 gap-4"}>
           {
@@ -52,10 +52,10 @@ const Jobs = () => {
             className="w-full"
           >
             <CarouselContent>
-              {jobs.map((job, index) => (
+              {pets.map((pet, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                   <div className="p-1">
-                    <JobCard job={job}/>
+                    <PetCard pet={pet}/>
                   </div>
                 </CarouselItem>
               ))}
@@ -76,4 +76,4 @@ const Jobs = () => {
   );
 };
 
-export default Jobs;
+export default Pets;

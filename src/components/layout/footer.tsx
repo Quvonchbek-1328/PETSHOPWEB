@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="flex sm:flex-row flex-col sm:gap-y-0 gap-y-4 justify-between items-center">
           <span className="flex items-center text-white text-6xl font-roboto font-bold gap-x-1.5">
             <img src="/logo.svg" alt="" className={"w-14 h-14"}/>
-            <span className="text-darkblue">UZ</span>WORKS
+            <span className="text-darkblue">Pet</span>Shop
           </span>
           <div className="flex flex-row gap-x-4">
             <div className="p-2 bg-white rounded-full">
@@ -32,16 +32,16 @@ const Footer = () => {
           <div className="flex flex-col font-roboto justify-self-start">
             <span className="font-semibold py-4">Menu</span>
             <div className="flex flex-col gap-y-1">
-              <span>Ishlar</span>
-              <span>Ishchilar</span>
+              <span>Pets</span>
+              <span>Pets1</span>
               <span>Yangiliklar</span>
             </div>
           </div>
           <div className="flex flex-col font-roboto lg:justify-self-center">
             <span className="font-semibold py-4">Mizjozlar</span>
             <div className="flex flex-col gap-y-1">
-              <span>Kompaniyalar</span>
-              <span>Ishchilar</span>
+              <span>BRANDLAR</span>
+              <span>Pets1</span>
             </div>
           </div>
           <div className="flex flex-col font-roboto lg:justify-self-center">
@@ -52,7 +52,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="flex flex-col font-roboto lg:justify-self-end">
-            <span className="font-semibold py-4">Kompaniya</span>
+            <span className="font-semibold py-4">BRANDLAR</span>
             <div className="flex flex-col gap-y-1">
               <span>Biz haqimizda</span>
               <span>Aloqa</span>

@@ -3,13 +3,13 @@
 import {Button} from "@/components/ui/button";
 import Link from "next/link";
 import {useEffect, useState} from "react";
-import {Experience, Worker} from "@/types";
-import {getExperienceByUserId, getWorkerById, getWorkersByCategoryId} from "@/store/api";
+import {Product, Seller} from "@/types";
+import {getProductByUserId, getSellerById, getSellersByCategoryId} from "@/store/api";
 import {SkeletonDetail} from "@/components/skeleton/skeleton-detail";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import {Badge} from "@/components/ui/badge";
 import {format} from "date-fns";
-import WorkerCard from "@/components/worker-card";
+import WorkerCard from "@/components/seller-card";
 import Partners from "@/components/partners/partners";
 
 interface SocialButtonProps {
@@ -153,33 +153,33 @@ function SocialButtonIn({link, title}: SocialButtonProps) {
   </Button>;
 }
 
-const WorkerDetail = ({ params }: { params: { viewId: string } }) => {
-  const [worker, setWorker] = useState<Worker>();
-  const [categoryWorkers, setCategoryWorkers] = useState<Worker[]>();
-  const [experiences, setExperiences] = useState<Experience[]>();
+const SellerDetail = ({ params }: { params: { viewId: string } }) => {
+  const [seller, setSeller] = useState<Seller>();
+  const [categorySellers, setCategorySellers] = useState<Seller[]>();
+  const [products, setProducts] = useState<Product[]>();
   const [loading, setLoading] = useState(true);
 
 
   useEffect(() => {
     if (params.viewId) {
-      getWorkerById(params.viewId).then((data) => {
-        setWorker(data);
+      getSellerById(params.viewId).then((data) => {
+        setSeller(data);
       });
     }
   }, [params.viewId]);
 
   useEffect(() => {
-    const getPartOfJobs = async () => {
-      if (worker) {
-        const categoryWorker = await getWorkersByCategoryId(worker.jobCategory.id);
-        setCategoryWorkers(categoryWorker);
-        const experiences = await getExperienceByUserId(worker.createdBy);
-        setExperiences(experiences);
+    const getPartOfPets = async () => {
+      if (seller) {
+        const categorySeller = await getSellersByCategoryId(seller.petCategory.id);
+        setCategorySellers(categorySeller);
+        const products = await getProductByUserId(seller.createdBy);
+        setProducts(products);
         setLoading(false)
       }
     };
-    getPartOfJobs();
-  }, [worker]);
+    getPartOfPets();
+  }, [seller]);
 
   return (
     <div className="flex flex-col gap-y-8">
@@ -190,39 +190,39 @@ const WorkerDetail = ({ params }: { params: { viewId: string } }) => {
               <Avatar>
                 <AvatarImage
                   src="/src/assets/worker.svg"
-                  alt={worker?.fullName}
+                  alt={seller?.fullName}
                 />
-                <AvatarFallback>{worker?.fullName.charAt(0)}</AvatarFallback>
+                <AvatarFallback>{seller?.fullName.charAt(0)}</AvatarFallback>
               </Avatar>
               <h1 className="text-darkindigo font-bold text-lg">
-                {worker?.fullName}
+                {seller?.fullName}
               </h1>
             </div>
             <div className="flex flex-row gap-x-5 items-center">
               <div className="flex flex-col items-center gap-y-0.5">
                 <span className="text-xs">Ish turi</span>
                 <Badge className="text-gray-400 font-normal">
-                  {worker?.jobCategory?.title}
+                  {seller?.petCategory?.title}
                 </Badge>
               </div>
               <div className="bg-lightblue h-fit w-[3px]"/>
               <div className="flex flex-col items-center gap-y-0.5">
                 <span className="text-xs">Jins</span>
                 <Badge className="text-gray-400 font-normal">
-                  {worker?.gender === "Male" ? "Erkak" : worker?.gender === "Female" ? "Ayol" : "Aniqlanmagan"}
+                  {seller?.gender === "Male" ? "Erkak" : seller?.gender === "Female" ? "Ayol" : "Aniqlanmagan"}
                 </Badge>
               </div>
             </div>
             <div className="flex flex-col pt-3 gap-y-3">
               <h2 className="text-darkindigo font-bold text-2xl">
-                Ish haqida to&apos;liq malumotlar
+                Uy hayvoni haqida to&apos;liq malumotlar
               </h2>
               <div className="flex flex-col gap-y-1">
                 <span className="font-normal text-base text-gray-400">
                   F.I.SH
                 </span>
                 <span className="text-darkindigo font-semibold text-lg">
-                  {worker?.fullName}
+                  {seller?.fullName}
                 </span>
               </div>
               <div className="flex flex-col gap-y-1">
@@ -230,25 +230,25 @@ const WorkerDetail = ({ params }: { params: { viewId: string } }) => {
                   Tug&apos;ilgan sana
                 </span>
                 <span className="text-darkindigo font-semibold text-lg">
-                  {format(worker?.birthDate || new Date(), "dd.MM.yyyy")}-yil
+                  {format(seller?.birthDate || new Date(), "dd.MM.yyyy")}-yil
                 </span>
               </div>
               <div className="flex flex-col gap-y-1">
                 <span className="font-normal text-base text-gray-400">
-                  Maosh
+                  Price
                 </span>
                 <span className="text-darkindigo font-semibold text-lg">
-                  {worker?.salary} so&apos;m/
+                  {seller?.price} so&apos;m/
                   <span className="text-yellow-400">oy</span>
                 </span>
               </div>
               <div className="flex flex-row justify-between">
                 <div className="flex flex-col gap-y-1">
                   <span className="font-normal text-base text-gray-400">
-                    Ish vaqti
+                    Lunch vaqti
                   </span>
                   <span className="text-darkindigo font-semibold text-lg">
-                    {worker?.workingTime}
+                    {seller?.lunchTime}
                   </span>
                 </div>
                 <div className="flex flex-col gap-y-1">
@@ -256,28 +256,28 @@ const WorkerDetail = ({ params }: { params: { viewId: string } }) => {
                     Ish grafigi
                   </span>
                   <span className="text-darkindigo font-semibold text-lg">
-                    {worker?.workingSchedule}
+                    {seller?.lunchSchedule}
                   </span>
                 </div>
               </div>
               <div className="flex flex-col gap-y-1">
                 <span className="font-normal text-base text-gray-400">
-                  Ish tajribasi
+                  Uy hayvoni ovqat muddati tajribasi
                 </span>
-                {experiences?.map((exp) => (
-                  <div className="flex flex-col gap-y-1" key={exp.id}>
+                {products?.map((pro) => (
+                  <div className="flex flex-col gap-y-1" key={pro.id}>
                     <span className="text-darkindigo font-semibold text-lg">
-                      {exp.position}
+                      {pro.position}
                     </span>
                     <span className="text-darkindigo font-semibold text-lg">
-                      {exp.companyName}
+                      {process.companyName}
                     </span>
                     <span className="text-darkindigo font-semibold text-lg">
-                      {format(exp?.startDate || new Date(), "dd.MM.yyyy")} -{" "}
-                      {format(exp?.endDate || new Date(), "dd.MM.yyyy")}
+                      {format(pro?.startDate || new Date(), "dd.MM.yyyy")} -{" "}
+                      {format(pro?.endDate || new Date(), "dd.MM.yyyy")}
                     </span>
                     <span className="text-darkindigo font-semibold text-lg">
-                      {exp.description}
+                      {pro.description}
                     </span>
                   </div>
                 ))}
@@ -287,7 +287,7 @@ const WorkerDetail = ({ params }: { params: { viewId: string } }) => {
                   E&apos;lon berilgan sana
                 </span>
                 <span className="text-darkindigo font-semibold text-lg">
-                  {format(worker?.createDate || new Date(), "dd.MM.yyyy")}-yil
+                  {format(seller?.createDate || new Date(), "dd.MM.yyyy")}-yil
                 </span>
               </div>
               <div className="flex flex-col gap-y-1">
@@ -295,7 +295,7 @@ const WorkerDetail = ({ params }: { params: { viewId: string } }) => {
                   Manzil
                 </span>
                 <span className="text-darkindigo font-semibold text-lg">
-                  {worker?.district.region?.name}, {worker?.district?.name}
+                  {seller?.district.region?.name}, {seller?.district?.name}
                 </span>
               </div>
               <div className="flex flex-col gap-y-1">
@@ -303,8 +303,8 @@ const WorkerDetail = ({ params }: { params: { viewId: string } }) => {
                   Ijtimoiy tarmoqlardan ko&apos;rish
                 </span>
                 <div className="flex sm:flex-row flex-col sm:gap-x-16 gap-x-0 sm:gap-y-0 gap-y-2">
-                  <SocialButtonTg link={worker?.telegramLink} title={'Telegram'}/>
-                  <SocialButtonIn link={worker?.instagramLink} title={'Instagram'}/>
+                  <SocialButtonTg link={seller?.telegramLink} title={'Telegram'}/>
+                  <SocialButtonIn link={seller?.instagramLink} title={'Instagram'}/>
                 </div>
               </div>
               <div className="flex flex-col gap-y-1">
@@ -315,7 +315,7 @@ const WorkerDetail = ({ params }: { params: { viewId: string } }) => {
                   <Button
                     className="sm:w-fit w-full text-blue-400 bg-white px-5 py-1 border-blue-400 hover:bg-blue-400 border-2 border-solid rounded-md hover:text-white"
                   >
-                    <Link href={`https://t.me/${worker?.tgUserName}`} className={"flex flex-row gap-x-2.5"}>
+                    <Link href={`https://t.me/${seller?.tgUserName}`} className={"flex flex-row gap-x-2.5"}>
                       <svg
                         width="25"
                         height="24"
@@ -380,7 +380,7 @@ const WorkerDetail = ({ params }: { params: { viewId: string } }) => {
                   <Button
                     className="sm:w-fit w-full text-green-400 bg-white px-5 py-1 border-green-400 hover:bg-green-400 border-2 border-solid rounded-md hover:text-white"
                   >
-                    <Link href={`tel:${worker?.phoneNumber}`} className={'flex flex-row gap-x-2.5'}>
+                    <Link href={`tel:${seller?.phoneNumber}`} className={'flex flex-row gap-x-2.5'}>
                       <svg
                         width="25"
                         height="24"
@@ -407,11 +407,11 @@ const WorkerDetail = ({ params }: { params: { viewId: string } }) => {
             </div>
           </div>)}
           <div className="flex flex-col gap-y-6 col-span-1 rounded-xl">
-            {categoryWorkers
+            {categorSellers
               ?.slice(0, 5)
-              .filter((item) => item.id !== worker?.id)
+              .filter((item) => item.id !== seller?.id)
               .map((item) => (
-                <WorkerCard worker={item} key={item.id}/>
+                <SellerCard seller={item} key={item.id}/>
               ))}
           </div>
         </div>
@@ -421,4 +421,4 @@ const WorkerDetail = ({ params }: { params: { viewId: string } }) => {
   );
 };
 
-export default WorkerDetail;
+export default SellerDetail;

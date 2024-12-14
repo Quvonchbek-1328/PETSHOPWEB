@@ -1,12 +1,12 @@
 import {Check, ChevronsUpDown} from "lucide-react";
 import React, {SetStateAction, useEffect, useState} from "react";
-import {JobCategory, District, Job, Region, Worker} from "@/types";
+import {PetCategory, District, Pet, Region, Seller} from "@/types";
 import {Input} from "@/components/ui/input";
 import {
-  getAllJobsFiltered, getAllWorkersFiltered,
-  getCountFilteredJobs, getCountFilteredWorkers,
+  getAllPetsFiltered, getAllSellersFiltered,
+  getCountFilteredPets, getCountFilteredSellers,
   getDistrictsByRegionId,
-  getJobCategories,
+  getPetCategories,
   getRegions
 } from "@/store/api";
 import {Label} from "@/components/ui/label";
@@ -18,8 +18,8 @@ import {cn} from "@/lib/utils";
 
 
 interface FilterProps {
-  setWorkers?: (workers: SetStateAction<Worker[]>) => void,
-  setJobs?: (jobs: SetStateAction<Job[]>) => void,
+  setWorkers?: (sellers: SetStateAction<Seller[]>) => void,
+  setJobs?: (pets: SetStateAction<Pet[]>) => void,
   pageNumber: number,
   pageSize: number,
   setCount: (value: (((prevState: number) => number) | number)) => void,
@@ -45,13 +45,13 @@ const DebouncedInput: React.FC<{
   return <Input placeholder={placeholder} onChange={handleChange}/>;
 };
 
-const Filter = ({setWorkers, setJobs, pageNumber, pageSize, setCount, setCurrentPage, setIsLoaded}: FilterProps) => {
+const Filter = ({setSellers, setPets, pageNumber, pageSize, setCount, setCurrentPage, setIsLoaded}: FilterProps) => {
   const [openc, setOpenc] = useState(false);
   const [valuec, setValuec] = useState("");
   const [openr, setOpenr] = useState(false);
   const [opend, setOpend] = useState(false);
   const [valued, setValued] = useState("");
-  const [allCategory, setAllCategory] = useState<JobCategory[]>([]);
+  const [allCategory, setAllCategory] = useState<PetCategory[]>([]);
   const [district, setDistrict] = useState<District[]>([]);
   const [valuer, setValuer] = useState("");
   // const [count, setCount] = useState(0)
@@ -60,7 +60,7 @@ const Filter = ({setWorkers, setJobs, pageNumber, pageSize, setCount, setCurrent
   const [currentGender, setCurrentGender] = useState("")
 
   useEffect(() => {
-    getJobCategories().then((categories) => setAllCategory(categories));
+    getPetCategories().then((categories) => setAllCategory(categories));
     getRegions().then((regions) => setRegions(regions));
   }, []);
 
@@ -75,24 +75,24 @@ const Filter = ({setWorkers, setJobs, pageNumber, pageSize, setCount, setCurrent
 
   useEffect(() => {
       if (params.has("pageNumber") && params.has("pageSize")) {
-        if (setJobs) {
-          getAllJobsFiltered(params)
-            .then((jobs) => {
-              setJobs(jobs)
+        if (setPets) {
+          getAllPetsFiltered(params)
+            .then((pets) => {
+              setPets(pets)
               setIsLoaded(false)
             })
-          getCountFilteredJobs(params)
+          getCountFilteredPets(params)
             .then(count => {
               setCount(count)
             })
         }
-        if (setWorkers) {
-          getAllWorkersFiltered(params)
-            .then((workers) => {
-              setWorkers(workers)
+        if (setSellers) {
+          getAllSellersFiltered(params)
+            .then((sellers) => {
+              setSellers(sellers)
               setIsLoaded(false)
             })
-          getCountFilteredWorkers(params)
+          getCountFilteredSellers(params)
             .then(count => {
               setCount(count)
             })
@@ -235,7 +235,7 @@ const Filter = ({setWorkers, setJobs, pageNumber, pageSize, setCount, setCurrent
                     key={category.id}
                     value={category.title}
                     onSelect={(currentValue) => {
-                      putParams("jobCategoryId",
+                      putParams("petCategoryId",
                         currentValue === valuec ? "" : allCategory.find((c) => c.title.toLocaleLowerCase() === currentValue)
                           ?.id || ""
                       )

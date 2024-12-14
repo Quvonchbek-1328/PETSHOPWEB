@@ -1,6 +1,6 @@
 // District
 import axios from "@/store/axios";
-import {District, FAQ, Feedback, Job, JobCategory, Region, Worker} from "@/types";
+import {District, FAQ, Feedback, Pet, PetCategory, Region, Seller} from "@/types";
 
 export async function getDistrictsByRegionId(regionId: string) {
   const {data} = await axios.get<District[]>(`/api/District/GetByRegionId/${regionId}`);
@@ -31,85 +31,85 @@ export async function getFeedbacks() {
 }
 
 // Job Category
-export async function getJobCategories() {
-  const {data} = await axios.get<JobCategory[]>("/api/JobCategory/GetAll");
+export async function getPetCategories() {
+  const {data} = await axios.get<PetCategory[]>("/api/PetCategory/GetAll");
   return data;
 }
 
-export async function getJobCategoryById(id: string) {
-  const {data} = await axios.get<JobCategory>(`/api/JobCategory/GetById/${id}`);
+export async function getPetCategoryById(id: string) {
+  const {data} = await axios.get<PetCategory>(`/api/PetCategory/GetById/${id}`);
   return data;
 }
 
 //Job
-export async function getTopJobs() {
-  const {data} = await axios.get<Job[]>("/api/Job/GetTopJobs");
+export async function getTopPets() {
+  const {data} = await axios.get<Pet[]>("/api/Pet/GetTopPets");
   return data;
 }
 
 export async function getJobs() {
-  const {data} = await axios.get<Job[]>("/api/Job/GetAll");
+  const {data} = await axios.get<Pet[]>("/api/Pet/GetAll");
   return data;
 }
 
-export async function getJobById(id: string) {
-  const {data} = await axios.get<Job>(`/api/Job/GetById/${id}`);
+export async function getPetById(id: string) {
+  const {data} = await axios.get<Pet>(`/api/Pet/GetById/${id}`);
   return data;
 }
 
-export const getCountFilteredJobs = async (params: Map<string, string>): Promise<number> => {
-  const {data} = await axios.get(`/api/Job/GetCountForFilter?${getQuery(params)}`);
+export const getCountFilteredPets = async (params: Map<string, string>): Promise<number> => {
+  const {data} = await axios.get(`/api/Pet/GetCountForFilter?${getQuery(params)}`);
   return data;
 };
 
-export const getCountJobsForCategory = async (id: string): Promise<number> => {
-  const {data} = await axios.get(`/api/Job/GetCountForFilter?jobCategoryId=${id}`);
+export const getCountPetsForCategory = async (id: string): Promise<number> => {
+  const {data} = await axios.get(`/api/Pet/GetCountForFilter?petCategoryId=${id}`);
   return data;
 }
 
-export const getAllJobsFiltered = async (params: Map<string, string>) => {
-  const {data} = await axios.get(`/api/Job/GetAll?${getQuery(params)}`)
+export const getAllPetsFiltered = async (params: Map<string, string>) => {
+  const {data} = await axios.get(`/api/Pet/GetAll?${getQuery(params)}`)
   return data;
 }
 
-export const getJobByCategoryId = async (
+export const getPetByCategoryId = async (
   id: string,
   pageNumber: number,
   pageSize: number
-): Promise<Job[]> => {
+): Promise<Pet[]> => {
   const {data} = await axios.get(
-    `/api/Job/GetAll?jobCategoryId=${id}&pageNumber=${pageNumber}&pageSize=${pageSize}`
+    `/api/Pet/GetAll?jobCategoryId=${id}&pageNumber=${pageNumber}&pageSize=${pageSize}`
   );
   return data;
 };
 
 // Worker
-export async function getTopWorkers() {
-  const {data} = await axios.get<Worker[]>("/api/Worker/GetTopWorkers");
+export async function getTopSellers() {
+  const {data} = await axios.get<Seller[]>("/api/Seller/GetTopSellers");
   return data;
 }
 
-export async function getWorkerById(id: string) {
-  const {data} = await axios.get<Worker>(`/api/Worker/GetById/${id}`);
+export async function getSellerById(id: string) {
+  const {data} = await axios.get<Seller>(`/api/Seller/GetById/${id}`);
   return data;
 }
 
-export const getWorkersByCategoryId = async (id: string): Promise<Worker[]> => {
-  const {data} = await axios.get(`/api/Worker/GetAll?jobCategoryId=${id}`);
+export const getSellersByCategoryId = async (id: string): Promise<Seller[]> => {
+  const {data} = await axios.get(`/api/Seller/GetAll?petCategoryId=${id}`);
   return data;
 }
 
-export const getExperienceByUserId = async (id: string) => {
-  const {data} = await axios.get(`/api/Experience/GetByUserId/${id}`);
+export const getProductByUserId = async (id: string) => {
+  const {data} = await axios.get(`/api/Product/GetByUserId/${id}`);
   return data;
 }
 
-export const getCountFilteredWorkers = async (params: Map<string, string>): Promise<number> => {
-  const {data} = await axios.get(`/api/Worker/GetCountForFilter?${getQuery(params)}`);
+export const getCountFilteredSellers = async (params: Map<string, string>): Promise<number> => {
+  const {data} = await axios.get(`/api/Seller/GetCountForFilter?${getQuery(params)}`);
   return data;
 }
-export const getAllWorkersFiltered = async (params: Map<string, string>) => {
-  const {data} = await axios.get(`/api/Worker/GetAll?${getQuery(params)}`)
+export const getAllSellersFiltered = async (params: Map<string, string>) => {
+  const {data} = await axios.get(`/api/Seller/GetAll?${getQuery(params)}`)
   return data;
 }
 

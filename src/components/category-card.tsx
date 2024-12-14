@@ -1,10 +1,10 @@
 import {useEffect, useState} from "react";
-import {JobCategory} from "@/types";
-import {getCountJobsForCategory} from "@/store/api";
+import {PetCategory} from "@/types";
+import {getCountPetsForCategory} from "@/store/api";
 import {SkeletonCategory} from "@/components/skeleton/skeleton-category";
 
 interface CategoryCardProps {
-  category: JobCategory
+  category: PetCategory
 }
 
 const CategoryCard = ({category}: CategoryCardProps) => {
@@ -12,7 +12,7 @@ const CategoryCard = ({category}: CategoryCardProps) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getCountJobsForCategory(category.id).then((c) => (setCount(c))).then(() => setLoading(false))
+    getCountPetsForCategory(category.id).then((c) => (setCount(c))).then(() => setLoading(false))
   }, [category]);
 
   return (

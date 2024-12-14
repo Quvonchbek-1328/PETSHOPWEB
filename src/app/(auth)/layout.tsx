@@ -5,9 +5,9 @@ import "../(home)/globals.css";
 import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
-  title: "Uzworks Uz",
+  title: "PetSHop Uz",
   description:
-    "Uzworks Uz is a platform for freelancers and clients to connect and work together.",
+    "PetSHop Uz is a platform for seller and pets to connect together.",
 };
 
 export default function RootLayout({

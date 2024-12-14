@@ -2,15 +2,16 @@
 
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { JobCategory, District, Job, Region } from "@/types";
+import { PetCategory, District, Pet, Region } from "@/types";
 import { useState, useEffect } from "react";
 import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import {getJobByCategoryId, getJobById} from "@/store/api";
+import {getPetByCategoryId, getPetById} from "@/store/api";
 import {SkeletonDetail} from "@/components/skeleton/skeleton-detail";
-import JobCard from "@/components/job-card";
+import JobCard from "@/components/pet-card";
 import Partners from "@/components/partners/partners";
+import { PenToolIcon } from "lucide-react";
 
 interface SocialButtonProps {
   link: string | undefined
@@ -153,39 +154,39 @@ function SocialButtonIn({link, title}: SocialButtonProps) {
   </Button>;
 }
 const JobDetail = ({ params }: { params: { viewId: string } }) => {
-  const [job, setJob] = useState<Job>();
-  const [categoryJobs, setCategoryJobs] = useState<Job[]>();
+  const [job, setPet] = useState<Pet>();
+  const [categoryPets, setCategorypets] = useState<Pet[]>();
   const [loading, setLoading] = useState(true)
   const [iframeUrl, setIframeUrl] = useState("");
 
   useEffect(() => {
     if (params.viewId) {
-      getJobById(params.viewId).then((data) => {
-        setJob(data);
+      getPetById(params.viewId).then((data) => {
+        setPet(data);
       });
     }
   }, [params.viewId]);
 
   useEffect(() => {
-    const getPartOfJobs = async () => {
+    const getPartOfPets = async () => {
       if (job) {
-        const categoryJob = await getJobByCategoryId(job.jobCategory.id, 1, 5);
-        setCategoryJobs(categoryJob);
+        const categoryJob = await getPetByCategoryId(pet.petCategory.id, 1, 5);
+        setCategoryPets(categoryPet);
         const API_KEY = "AIzaSyAcfsk4C5rdqDe-TAtNFEQjcC6Vsak-zu4";
         const url =
           `https://www.google.com/maps/embed/v1/place?key=${API_KEY}` +
           "&q=" +
-          job?.latitude +
+          pet?.latitude +
           "," +
-          job?.longitude +
+          pet?.longitude +
           "&language=uz" +
           "&zoom=13";
         setIframeUrl(url);
         setLoading(false)
       }
     };
-    getPartOfJobs();
-  }, [job]);
+    getPartOfPets();
+  }, [pet]);
 
   return (
     <div className="flex flex-col gap-y-8">
@@ -196,18 +197,18 @@ const JobDetail = ({ params }: { params: { viewId: string } }) => {
               <Avatar>
                 <AvatarImage src={'/src/assets/job.svg'} alt={job?.title} />
                 <AvatarFallback>
-                  {job?.title?.charAt(0)}
+                  {pet?.title?.charAt(0)}
                 </AvatarFallback>
               </Avatar>
               <h1 className="text-darkindigo font-bold text-lg">
-                {job?.title}
+                {PenToolIcon?.title}
               </h1>
             </div>
             <div className="flex flex-row gap-x-5 items-center">
               <div className="flex flex-col items-center gap-y-0.5">
-                <span className="text-xs">Ish turi</span>
+                <span className="text-xs">Uy hayvoning  turi</span>
                 <Badge className="text-gray-400 font-normal">
-                  {job?.jobCategory?.title}
+                  {pet?.petCategory?.title}
                 </Badge>
               </div>
               <div className="bg-lightblue h-fit w-[3px]" />
@@ -220,14 +221,14 @@ const JobDetail = ({ params }: { params: { viewId: string } }) => {
             </div>
             <div className="flex flex-col pt-3 gap-y-3">
               <h2 className="text-darkindigo font-bold text-2xl">
-                Ish haqida to&apos;liq malumotlar
+                Uy hayvoni  haqida to&apos;liq malumotlar
               </h2>
               <div className="flex flex-col gap-y-1">
                 <span className="font-normal text-base text-gray-400">
                   Maosh
                 </span>
                 <span className="text-darkindigo font-semibold text-lg">
-                  {job?.salary} so&apos;m/<span className="text-yellow-400">oy</span>
+                  {pet?.price} so&apos;m/<span className="text-yellow-400">oy</span>
                 </span>
               </div>
               <div className="flex flex-col gap-y-1">
@@ -244,7 +245,7 @@ const JobDetail = ({ params }: { params: { viewId: string } }) => {
                     Ish vaqti
                   </span>
                   <span className="text-darkindigo font-semibold text-lg">
-                    {job?.workingTime}
+                    {pet?.lunchTime}
                   </span>
                 </div>
                 <div className="flex flex-col gap-y-1">
@@ -252,7 +253,7 @@ const JobDetail = ({ params }: { params: { viewId: string } }) => {
                     Ish grafigi
                   </span>
                   <span className="text-darkindigo font-semibold text-lg">
-                    {job?.workingSchedule}
+                    {pet?.lunchSchedule}
                   </span>
                 </div>
               </div>
@@ -261,7 +262,7 @@ const JobDetail = ({ params }: { params: { viewId: string } }) => {
                   Sharoitlar
                 </span>
                 <span className="text-darkindigo font-semibold text-lg">
-                  {job?.benefit}
+                  {pet?.benefit}
                 </span>
               </div>
               <div className="flex flex-col gap-y-1">
@@ -269,7 +270,7 @@ const JobDetail = ({ params }: { params: { viewId: string } }) => {
                   Yosh uchun talab
                 </span>
                 <span className="text-darkindigo font-semibold text-lg">
-                  {job?.minAge} dan {job?.maxAge} gacha
+                  {pet?.minAge} dan {pet?.maxAge} gacha
                 </span>
               </div>
               <div className="flex flex-col gap-y-1">
@@ -277,7 +278,7 @@ const JobDetail = ({ params }: { params: { viewId: string } }) => {
                   Sharoitlar
                 </span>
                 <span className="text-darkindigo font-semibold text-lg">
-                  {job?.requirement}
+                  {pet?.requirement}
                 </span>
               </div>
               <div className="flex flex-col gap-y-1">
@@ -293,8 +294,8 @@ const JobDetail = ({ params }: { params: { viewId: string } }) => {
                   Ijtimoiy tarmoqlardan ko&apos;rish
                 </span>
                 <div className="flex sm:flex-row flex-col sm:gap-x-16 gap-x-0 sm:gap-y-0 gap-y-2">
-                  <SocialButtonTg link={job?.telegramLink} title={'Telegram'}/>
-                  <SocialButtonIn link={job?.instagramLink} title={'Instagram'}/>
+                  <SocialButtonTg link={pet?.telegramLink} title={'Telegram'}/>
+                  <SocialButtonIn link={pet?.instagramLink} title={'Instagram'}/>
                 </div>
               </div>
               <div className="flex flex-col gap-y-1">
@@ -318,7 +319,7 @@ const JobDetail = ({ params }: { params: { viewId: string } }) => {
                   <Button
                     className="sm:w-fit w-full text-blue-400 bg-white px-5 py-1 border-blue-400 hover:bg-blue-400 border-2 border-solid rounded-md hover:text-white"
                   >
-                    <Link href={`https://t.me/${job?.tgUserName}`} className={"flex flex-row gap-x-2.5"}>
+                    <Link href={`https://t.me/${pet?.tgUserName}`} className={"flex flex-row gap-x-2.5"}>
                       <svg
                         width="25"
                         height="24"
@@ -383,7 +384,7 @@ const JobDetail = ({ params }: { params: { viewId: string } }) => {
                   <Button
                     className="sm:w-fit w-full text-green-400 bg-white px-5 py-1 border-green-400 hover:bg-green-400 border-2 border-solid rounded-md hover:text-white"
                   >
-                    <Link href={`tel:${job?.phoneNumber}`} className={'flex flex-row gap-x-2.5'}>
+                    <Link href={`tel:${pet?.phoneNumber}`} className={'flex flex-row gap-x-2.5'}>
                       <svg
                         width="25"
                         height="24"
@@ -410,10 +411,10 @@ const JobDetail = ({ params }: { params: { viewId: string } }) => {
             </div>
           </div>)}
           <div className="flex flex-col gap-y-6 col-span-1 rounded-xl">
-            {categoryJobs
-              ?.filter((item) => item.id !== job?.id)
+            {categoryPets
+              ?.filter((item) => item.id !== pet?.id)
               .map((item) => (
-                <JobCard job={item} key={item.id} />
+                <PetCard pet={item} key={item.id} />
               ))}
           </div>
         </div>
@@ -423,4 +424,4 @@ const JobDetail = ({ params }: { params: { viewId: string } }) => {
   );
 };
 
-export default JobDetail;
+export default PetDetail;

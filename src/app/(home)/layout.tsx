@@ -10,7 +10,7 @@ import { Analytics } from "@vercel/analytics/next";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Uzworks Uz",
+  title: "PetShop Uz",
   description:
     "Uzworks Uz is a platform for freelancers and clients to connect and work together.",
 };

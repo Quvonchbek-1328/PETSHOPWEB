@@ -3,22 +3,22 @@
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
-import { getTopWorkers } from "@/store/api";
+import { getTopSellers } from "@/store/api";
 import { SkeletonCard } from "@/components/skeleton/skeleton-card";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import WorkerCard from "@/components/worker-card";
-import { Worker } from "@/types";
+import SellerCard from "@/components/seller-card";
+import { Seller } from "@/types";
 
-const Workers = () => {
+const SellerComponents = () => {
   const [loading, setLoading] = useState(true)
-  const [workers, setWorkers] = useState<Worker[]>([])
+  const [sellers, setSellers] = useState<Seller[]>([])
   const router = useRouter();
-  // this is not best practice bro, 
+  // this is not best practice br o, 
   useEffect(() => {
-    getTopWorkers().then(
+    getTopSellers().then(
       (data) => {
-        setWorkers(data)
+        setSellers(data)
         setLoading(false)
       }
     )
@@ -28,7 +28,7 @@ const Workers = () => {
     <div className="bg-lightblue">
       <div className="container py-8 flex flex-col gap-y-8">
         <h1 className="text-center font-roboto sm:text-5xl text-4xl font-semibold">
-          <span className="text-darkblue">Top</span> Ishchilar
+          <span className="text-darkblue">Top</span> Xaridorlar
         </h1>
         {loading ? (<div className={"grid grid-cols-3 gap-4"}>
           {
@@ -51,10 +51,10 @@ const Workers = () => {
             className="w-full"
           >
             <CarouselContent>
-              {workers.map((worker, index) => (
+              {sellers.map((seller, index) => (
                 <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                   <div className="p-1">
-                    <WorkerCard worker={worker} />
+                    <SellerCard seller={seller} />
                   </div>
                 </CarouselItem>
               ))}
@@ -74,5 +74,4 @@ const Workers = () => {
     </div>
   );
 };
-
-export default Workers;
+export default SellerComponents;

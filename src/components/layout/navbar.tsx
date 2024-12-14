@@ -9,7 +9,7 @@ const Navbar = () => {
             <Link href="/" className={"flex gap-x-2 items-center"}>
               <img src='/dark-logo.svg' alt="" className={"w-10 h-10"}/>
               <span className="text-black text-4xl font-roboto font-bold">
-            <span className="text-darkblue">UZ</span>WORKS
+            <span className="text-darkblue">Pet</span>Shop
           </span>
             </Link>
           </div>
@@ -22,13 +22,14 @@ const Navbar = () => {
             <Link href="/" className={"flex gap-x-2 items-center"}>
               <img src='/dark-logo.svg' alt="" className={"w-10 h-10"}/>
               <span className="text-black text-4xl font-roboto font-bold">
-            <span className="text-darkblue">UZ</span>WORKS
+            <span className="text-darkblue">PET</span>SHOP
+
           </span>
             </Link>
           </div>
           <div className="flex flex-row items-center justify-center lg:gap-x-16 gap-x-8 font-mulish font-bold text-lg">
-            <Link href="/jobs">Ishlar</Link>
-            <Link href="/workers">Ishchilar</Link>
+            <Link href="/jobs">Uy hayvonlari</Link>
+            <Link href="/workers">Sellerlar</Link>
           </div>
         </div>
       </div>

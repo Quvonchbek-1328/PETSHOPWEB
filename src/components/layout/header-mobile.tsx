@@ -1,13 +1,13 @@
 "use client"
 
-import {useEffect, useRef} from "react";
-import {motion, useCycle} from "framer-motion";
+import { useEffect, useRef } from "react";
+import { motion, useCycle } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
 
 const HeaderMobile = () => {
-
   const containerRef = useRef(null);
-  const {height} = useDimensions(containerRef);
+  const { height } = useDimensions(containerRef);
   const [isOpen, toggleOpen] = useCycle(false, true);
 
   return (
@@ -15,21 +15,20 @@ const HeaderMobile = () => {
       initial={false}
       animate={isOpen ? 'open' : 'closed'}
       custom={height}
-      className={`fixed inset-0 z-50 w-full md:hidden ${
-        isOpen ? '' : 'pointer-events-none'
-      }`}
+      className={`fixed inset-0 z-50 w-full md:hidden ${isOpen ? '' : 'pointer-events-none'
+        }`}
       ref={containerRef}
     >
       <motion.div
         className="absolute inset-0 right-0 w-full bg-white"
         variants={sidebar}
       />
-      <motion.div className="pointer-events-auto absolute w-full top-0 z-30 h-14 bg-white"/>
+      <motion.div className="pointer-events-auto absolute w-full top-0 z-30 h-14 bg-white" />
       <motion.div className="pointer-events-auto absolute left-4 top-[14px] z-30 font-mulish font-bold text-2xl">
         <Link href="/" className={"flex gap-x-2 items-center"}>
-          <img src="/dark-logo.svg" alt="" className={"w-10 h-10"}/>
+          <Image src="/dark-logo.svg" alt="" className={"w-10 h-10"} width={10} height={10} />
           <span className="text-black text-4xl font-roboto font-bold">
-            <span className="text-darkblue">UZ</span>WORKS
+            <span className="text-darkblue">PET</span>SHOPS
           </span>
         </Link>
       </motion.div>
@@ -83,7 +82,7 @@ const HeaderMobile = () => {
           </Link>
         </motion.li>
       </motion.ul>
-      <MenuToggle toggle={toggleOpen}/>
+      <MenuToggle toggle={toggleOpen} />
     </motion.nav>
   );
 };
@@ -92,34 +91,36 @@ export default HeaderMobile;
 
 
 // -------------------------
-const MenuToggle = ({toggle}: { toggle: any }) => (
-  <button
-    onClick={toggle}
-    className="pointer-events-auto absolute right-4 top-[24px] z-30"
-  >
-    <svg width="23" height="23" viewBox="0 0 23 23">
-      <Path
-        variants={{
-          closed: {d: 'M 2 2.5 L 20 2.5'},
-          open: {d: 'M 3 16.5 L 17 2.5'},
-        }}
-      />
-      <Path
-        d="M 2 9.423 L 20 9.423"
-        variants={{
-          closed: {opacity: 1},
-          open: {opacity: 0},
-        }}
-        transition={{duration: 0.1}}
-      />
-      <Path
-        variants={{
-          closed: {d: 'M 2 16.346 L 20 16.346'},
-          open: {d: 'M 3 2.5 L 17 16.346'},
-        }}
-      />
-    </svg>
-  </button>
+const MenuToggle = ({ toggle }: { toggle: any }) => (
+  <>
+    <button
+      onClick={toggle}
+      className="pointer-events-auto absolute right-4 top-[24px] z-30"
+    >
+      <svg width="23" height="23" viewBox="0 0 23 23">
+        <Path
+          variants={{
+            closed: { d: 'M 2 2.5 L 20 2.5' },
+            open: { d: 'M 3 16.5 L 17 2.5' },
+          }}
+        />
+        <Path
+          d="M 2 9.423 L 20 9.423"
+          variants={{
+            closed: { opacity: 1 },
+            open: { opacity: 0 },
+          }}
+          transition={{ duration: 0.1 }}
+        />
+        <Path
+          variants={{
+            closed: { d: 'M 2 16.346 L 20 16.346' },
+            open: { d: 'M 3 2.5 L 17 16.346' },
+          }}
+        />
+      </svg>
+    </button>
+  </>
 );
 
 const Path = (props: any) => (
@@ -137,14 +138,14 @@ const MenuItemVariants = {
     y: 0,
     opacity: 1,
     transition: {
-      y: {stiffness: 1000, velocity: -100},
+      y: { stiffness: 1000, velocity: -100 },
     },
   },
   closed: {
     y: 50,
     opacity: 0,
     transition: {
-      y: {stiffness: 1000},
+      y: { stiffness: 1000 },
       duration: 0.02,
     },
   },
@@ -152,10 +153,10 @@ const MenuItemVariants = {
 
 const variants = {
   open: {
-    transition: {staggerChildren: 0.02, delayChildren: 0.15},
+    transition: { staggerChildren: 0.02, delayChildren: 0.15 },
   },
   closed: {
-    transition: {staggerChildren: 0.01, staggerDirection: -1},
+    transition: { staggerChildren: 0.01, staggerDirection: -1 },
   },
 };
 
@@ -178,7 +179,7 @@ const sidebar = {
   },
 };
 const useDimensions = (ref: any) => {
-  const dimensions = useRef({width: 0, height: 0});
+  const dimensions = useRef({ width: 0, height: 0 });
 
   useEffect(() => {
     if (ref.current) {

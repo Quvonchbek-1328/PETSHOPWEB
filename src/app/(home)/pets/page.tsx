@@ -1,8 +1,8 @@
-"use client";
+'use client'
 
 import CustomPagination from "@/components/ui/custom-pagination";
 import {Input} from "@/components/ui/input";
-import {Worker} from "@/types";
+import {Pet} from "@/types";
 import {PiListMagnifyingGlassDuotone} from "react-icons/pi";
 import {useState} from "react";
 import {
@@ -16,25 +16,25 @@ import {
 } from "@/components/ui/sheet";
 import {Button} from "@/components/ui/button";
 import Filter from "@/components/filter";
-import WorkerCard from "@/components/worker-card";
+import JobCard from "@/components/pet-card";
 import Partners from "@/components/partners/partners";
 import {SkeletonCard} from "@/components/skeleton/skeleton-card";
 
 
-const WorkersPage = () => {
-  const [workers, setWorkers] = useState<Worker[]>([]);
+const Pets = () => {
+  const [pets, setPets] = useState<Pet[]>([]);
+  const [isLoaded, setIsLoaded] = useState(true)
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [count, setCount] = useState(0)
-  const [isLoaded, setIsLoaded] = useState(true)
+  const [count, setCount] = useState(0);
   const usersPerPage = 6;
 
   return (
     <div className="flex flex-col gap-y-8">
       <div className="py-8 bg-lightblue">
         <div className="flex flex-col gap-y-8 container">
-          <h1 className="text-5xl font-semibold text-darkindigo">Ishchilar</h1>
-          <div className="grid grid-cols-4 gap-x-3 items-center py-4 justify-between"> {/* Search bar */}
+          <h1 className="text-5xl font-semibold text-darkindigo">Pets</h1>
+          <div className="grid grid-cols-4 gap-x-3 items-center py-4 justify-between">
             <Input
               placeholder="Qidirish..."
               value={searchTerm}
@@ -52,7 +52,7 @@ const WorkersPage = () => {
                   <SheetTitle>Filtirlash</SheetTitle>
                 </SheetHeader>
                 <Filter pageNumber={currentPage} pageSize={usersPerPage} setCount={setCount}
-                        setCurrentPage={setCurrentPage} setWorkers={setWorkers} setIsLoaded={setIsLoaded}/>
+                        setCurrentPage={setCurrentPage} setPets={setPets} setIsLoaded={setIsLoaded}/>
                 <SheetFooter className={"mt-4"}>
                   <SheetClose asChild>
                     <Button type="submit" className={"rounded-xl py-2 px-5"}>Saqlash</Button>
@@ -64,7 +64,7 @@ const WorkersPage = () => {
           <div className="grid md:grid-cols-6 grid-cols-1 gap-x-4">
             <div className="md:block hidden">
               <Filter
-                setWorkers={setWorkers}
+                setPets={setPets}
                 pageNumber={currentPage}
                 pageSize={usersPerPage}
                 setCurrentPage={setCurrentPage}
@@ -82,10 +82,10 @@ const WorkersPage = () => {
                   ))}
                 </div>
               </div>
-            ) : (
-              <div className={`flex flex-col col-span-5`}>
+              ) : (
+              <div className="flex flex-col col-span-5">
                 <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-3 w-full">
-                  {workers
+                  {pets
                     ?.filter((user) =>
                       user.title
                         ?.toLowerCase()
@@ -93,8 +93,8 @@ const WorkersPage = () => {
                         .replace(/\s+/g, "")
                         .includes(searchTerm.toLowerCase().replace(/\s+/g, ""))
                     )
-                    .map((w) => (
-                      <WorkerCard worker={w} key={w.id}/>
+                    .map((pet) => (
+                      <PetCard pet={pet} key={pet.id}/>
                     ))}
                 </div>
                 <div className="flex items-center py-4 justify-end">
@@ -119,4 +119,4 @@ const WorkersPage = () => {
   );
 };
 
-export default WorkersPage;
+export default Pets;

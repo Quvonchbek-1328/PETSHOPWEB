@@ -2,10 +2,10 @@ class BaseObject{
   id: string;
   createDate: Date;
   title: string;
-  salary: number;
+  price: number;
   gender: string;
-  workingTime: string;
-  workingSchedule: string;
+  lunchTime: string;
+  lunchSchedule: string;
   isTop: boolean;
   status: boolean;
   deadline: Date;
@@ -13,11 +13,11 @@ class BaseObject{
   instagramLink: string;
   tgUserName: string;
   phoneNumber: string;
-  jobCategory: JobCategory;
+  petCategory: PetCategory;
   district: District;
 }
 
-export class Job extends BaseObject {
+export class Pet extends BaseObject {
   benefit: string;
   requirement: string;
   minAge: number;
@@ -26,7 +26,7 @@ export class Job extends BaseObject {
   longitude: number;
 }
 
-export class Worker extends BaseObject {
+export class Seller extends BaseObject {
   createdBy: string;
   birthDate: Date;
   fullName: string;
@@ -58,17 +58,24 @@ export interface Feedback{
   dueDate: Date;
 }
 
-export interface JobCategory {
+export interface PetCategory {
   id: string;
   title: string;
   description: string;
 }
 
-export interface Experience {
+export interface Product {
   id: string;
   companyName: string;
   position: string;
   startDate: Date;
   endDate: Date;
   description: string;
+}
+
+export interface Pet{
+  id: string;
+  title: string;
+  price: number;
+  
 }
